@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html ng-app="x">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>UI.Ace : demo </title>
+
+
+<style type="text/css">
+  .ace_editor  {
+  height : 200px;
+}
+</style>
+  </head>
+  <body>
+
+
+ <tabset type="pills">
+    <tab heading="Class One">
+
+
+    <!-- Le content... -->
+<section >
+    <div ng-controller="MyController" ng-model = "content" ui-ace="{
+      useWrapMode : true,
+      showGutter: true,
+      mode: 'java',
+      theme:'crimson_editor',
+      onLoad: aceLoaded,
+      onChange: aceChanged,
+      require: ['ace/ext/language_tools']
+    }" >
+
+    </div>
+  
+
+</section>
+</tab>
+
+
+
+<tab heading="Class Two">
+<section >
+    <div ng-controller="MyController2" ng-model = "content" ui-ace="{
+      useWrapMode : true,
+      showGutter: true,
+      mode: 'java',
+      theme:'crimson_editor',
+      onLoad: aceLoaded,
+      onChange: aceChanged,
+      require: ['ace/ext/language_tools']
+    }" >
+
+    </div>
+  
+
+</section>
+</tab>
+
+</tabset>
+
+
+    <!-- Le vendor... -->
+   
+      <script src="ang.js"></script>
+      <script src="src-noconflict/ace.js"></script>
+     <script src="ui-ace.js"></script>
+     <script src="src-noconflict/ext-language_tools.js"></script>
+     <script src="src-noconflict/snippets/java.js"></script>
+ <script src="ui-bs.js"></script>
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+
+
+        var app = angular.module('x', ['ui.ace','ui.bootstrap']);
+
+        app.controller('MyController', [ '$scope', function($scope) {
+
+    $scope.content = '  public class One{  \n\n }';
+    $scope.editor = null;
+      $scope.aceLoaded = function(_editor){
+
+        $scope.editor = _editor;
+        // Editor part
+          var _session = _editor.getSession();
+          var _renderer = _editor.renderer;
+
+          //_session.require("ace/ext/language_tools");
+
+          // Options
+          _session.setUndoManager(new ace.UndoManager());
+
+
+          _editor.setOptions({
+              enableBasicAutocompletion: true,
+              enableSnippets: true,
+              enableLiveAutocompletion: false
+         }); 
+
+      };
+
+        $scope.aceChanged = function(e) {
+          console.log('content changed'+$scope.content);
+        };
+
+      }]);
+
+
+
+        app.controller('MyController2', [ '$scope', function($scope) {
+
+    $scope.content = '  public class Two{  \n\n }';
+    $scope.editor = null;
+      $scope.aceLoaded = function(_editor){
+
+        $scope.editor = _editor;
+        // Editor part
+          var _session = _editor.getSession();
+          var _renderer = _editor.renderer;
+
+          //_session.require("ace/ext/language_tools");
+
+          // Options
+          _session.setUndoManager(new ace.UndoManager());
+
+
+          _editor.setOptions({
+              enableBasicAutocompletion: true,
+              enableSnippets: true,
+              enableLiveAutocompletion: false
+         }); 
+
+      };
+
+        $scope.aceChanged = function(e) {
+          console.log('content changed'+$scope.content);
+        };
+
+      }]);
+
+
+    </script>
+  </body>
+</html>

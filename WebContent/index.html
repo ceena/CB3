@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="x">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>UI.Codemirror : demo </title>
+
+
+    <!-- Le css -->
+    <link rel="stylesheet" type="text/css" href="http://codemirror.net/lib/codemirror.css"/>
+    <link rel="stylesheet" type="text/css" href="http://codemirror.net/theme/twilight.css"/>
+
+  </head>
+  <body ng-controller="mc">
+
+
+    <!-- Le content... -->
+<section>
+  <div ui-codemirror="{
+      lineNumbers: true,
+      theme:'twilight',
+      lineWrapping : true,
+      mode: 'xml'
+    }" ng-model='code'>
+    
+    
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="runCode()">
+        Run Code
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="resetCode()">
+        Reset Code
+    </button>
+    
+    <div>Copyrights @ {{creator}}.</div>
+</section>
+
+
+
+    <!-- Le vendor... -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+      <script src="http://codemirror.net/lib/codemirror.js"></script>
+      <script src="http://codemirror.net/mode/xml/xml.js"></script>
+      <script src="https://rawgithub.com/angular-ui/ui-codemirror/bower/ui-codemirror.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

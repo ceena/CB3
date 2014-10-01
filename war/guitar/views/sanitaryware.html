@@ -1,0 +1,105 @@
+ <div class="row-fluid" style="margin-top:30px">
+      <div style="color:white;z-index:5" class="col-4 col-sm-2 col-lg-2">
+      
+      <div  >
+			<!-- ACCOUNT AREA -->
+			<h4><span style="font-family:sans-serif">Filters:</span></h4><br />
+			
+			<h4><span style="font-family:sans-serif">Brands:</span></h4>
+			<div class="subscribe_area pdbt10" ng-repeat="l_brand in brand">
+				<input type="checkbox" ng-click="setProductFilter($index,'brand')"><a ng-click="setProductFilter($index,'brand')" style="margin:0;cursor:pointer;width:75%" ref="javascript:void(0);" class="signup"><h5>{{l_brand}}</h5></a> </input><br>
+			</div>
+			<hr style="width:80%"/>
+			<h4><span style="font-family:sans-serif">Usage:</span></h4>
+			<div class="subscribe_area pdbt10" ng-repeat="l_use_case in use_case" >
+				<input type="checkbox" ng-click="setProductFilter($index,'use_case')"/><a ng-click="setProductFilter($index,'use_case')" style="margin:0;cursor:pointer;width:75%" ref="javascript:void(0);" class="signup"><h5>{{l_use_case}}</h5></a> <br>
+			</div>
+			<hr style="width:80%"/>
+			Price Filter:
+			<div  >From:<input style="margin:0;float:right;width:70%;height:30px"  type="number" ng-model="price_low" ng-change="filterByPrice()"> </div>
+			<div  >To:<input   style="margin:0;float:right;width:70%;height:30px" type="number" ng-model="price_high" ng-change="filterByPrice()"> </div>
+			
+			
+			<!-- SUBSCRIBE AREA -->
+			<div class="subscribe_area pdbt10">
+				<a href="javascript:void(0);" class="subscribe">SUBSCRIBE</a>
+			</div>
+			
+			<!-- SOCIAL -->
+			<div class="social_area pdbt10">
+				<ul class="social">
+				  <li><a href="javascript:void(0);" class="poshytip  facebook" title="Facebook"></a></li>
+				  <li><a href="javascript:void(0);" class="poshytip twitter" title="Twitter"></a></li>
+				  <li><a href="javascript:void(0);" class="poshytip dribbble" title="Dribble"></a></li>
+				  <li><a href="javascript:void(0);" class="poshytip vimeo" title="Vimeo"></a></li>
+				</ul>
+			</div>
+			
+		</div>
+		
+		</div>
+		
+		
+        <div class="col-14 col-sm-10 col-lg-10" style="margin-top:30px">
+        <div>
+		
+		
+					<!-- Hottest Website using directives -->
+			<div >	
+				
+				<div class="row-fluid">
+					<div  ng-repeat="product in products_filtered  | orderBy:'srch_rtng':reverse=true">
+						
+											
+						
+						<div ng-hide="product.hidden" class="col-3 col-sm-3 col-lg-3" style="min-height:400px;margin-top:0px;padding:0px" >
+					
+						
+						<a  ng-href="{{web.ssurl}}" rel="gallery" class="thumbnail">
+							<img style="margin:auto auto"  ng-src="images/{{product.product_id}}" alt="" />
+							
+							<div style="margin-left:15px;color:grey" >
+								<h4><span style="font:sans-serif">Brand: </span>{{product.brand}}</h4> 
+								<h4><span style="font:verdana">Product: </span>{{product.product}}</h4>
+								<h4><span style="font:verdana">Category: </span>{{product.product_category}}</h4><hr style="margin:3px;border-bottom:none"/>
+								<h4><span >Use Case: </span>{{product.use_case}}</h4>
+								<h4><span >Model: </span>{{product.image_url}}</h4>
+								<h4><span >Price: </span>{{product.price}}</h4><hr style="margin:3px;border-bottom:none"/>
+								<h5><span style="font:verdana" >{{product.description}} </span></h5>
+								</div>
+							</a>
+							<h4 style="color:white;display:block"><input type="checkbox" ng-click="toggleAddCompare(product)"/> Add to Compare</h4>
+							<h4 style="float:right;color:white;margin:0px 30px;"><input style="" type="checkbox" ng-click="toggleAddCompare(product)"/> Add to cart</h4>
+							
+						</div>
+						
+<!-- 						</span ng-if="checkEndIndex($index)"> -->
+						
+						</div>
+						
+				</div>	
+						
+						
+					</div>
+					
+		
+					
+				
+				
+				</div>
+			</div>
+			
+	
+		
+		</div>
+        
+        </div>
+        
+        
+        
+      </div>
+     
+
+
+    </div> <!-- /container -->
+    

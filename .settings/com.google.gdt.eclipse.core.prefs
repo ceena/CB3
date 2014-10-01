@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+jarsExcludedFromWebInfLib=C\:/p/ws_eclipse_ee/sri03051986/ecj-4.4.jar
+warSrcDir=war
+warSrcDirIsOutput=true

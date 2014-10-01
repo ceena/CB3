@@ -1,0 +1,23 @@
+public class Inventory{  
+
+	private List guitars; 
+	
+	public Inventory(){
+		guitars = new LinkedList();	
+	}
+	
+	public addGuitar(String serialNumber, double price, String builder,
+    	String model, String type, String backWood, String topWood){
+    	   //add guitar method body
+    	}
+    	
+    public getGuitar(String serialNumber){
+        // get guitar using serialNumber
+    }
+    
+    public search(Guitar guitar){
+        //search guitar method code goes here
+    }
+    
+    
+}

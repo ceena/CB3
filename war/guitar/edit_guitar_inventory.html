@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html ng-app="x">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>UI.Ace : demo </title>
+
+
+<style type="text/css">
+  .ace_editor  {
+  width : 600px;
+  height : 550px;
+}
+</style>
+  </head>
+  <body>
+
+
+
+    <!-- Le content... -->
+<section ng-controller="MyController">
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col">
+    <div style="float:left" ng-model = "content" ui-ace="{
+      useWrapMode : true,
+      showGutter: true,
+      mode: 'java',
+      theme:'crimson_editor',
+      onLoad: aceLoaded,
+      onChange: aceChanged,
+      require: ['ace/ext/language_tools']
+    }" >
+
+        </div>
+<img src="..\guitar\images\inventory.gif" style="float:left"/>
+        </div>
+        <div class="col">
+        
+</div>
+</div>
+</div>
+  
+  <div style="margin-left:40px">
+      <button type="button" class="btn btn-primary" ng-hide="outputDisplay" ng-click="runCode()">
+        Run Code
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="resetCode()">
+        Reset Code
+    </button>
+     <button type="button" class="btn btn-primary" ng-show="undomanager.hasUndo()" ng-click="undo()">
+        Undo
+    </button>
+    <button type="button" class="btn btn-primary" ng-show="undomanager.hasRedo()" ng-click="redo()">
+        Redo
+    </button>
+    </div>
+
+
+</section>
+
+
+
+    <!-- Le vendor... -->
+   
+      <script src="ang.js"></script>
+      <script src="src-noconflict/ace.js"></script>
+     <script src="ui-ace.js"></script>
+     <script src="src-noconflict/ext-language_tools.js"></script>
+     <script src="src-noconflict/snippets/java.js"></script>
+ <script src="ui-bs.js"></script>
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+
+
+        var app = angular.module('x', ['ui.ace','ui.bootstrap']);
+
+        app.controller('MyController', [ '$scope', '$http', function($scope, $http) {
+
+    $scope.outputDisplay = false;
+    $scope.content = '';
+    $scope.content_bck = '';
+
+$http.get('/guitar/content/guitar_inventory.txt').success(function(data, status, headers, config) {
+            if (data && status === 200) {
+                $scope.content = data;
+                $scope.content_bck = data;
+            }
+        });
+    
+
+      $scope.runCode= function(){
+    
+     $http({method: 'POST', data:$scope.content, url: '/GuitarInventoryEvaluator'}).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+          $scope.content_bck = $scope.content;
+          $scope.content = data;
+          $scope.outputDisplay = true;
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+  };
+  
+  $scope.resetCode = function(){
+    $scope.content = $scope.content_bck;
+    $scope.outputDisplay = false;
+  };
+
+  $scope.undomanager = null;
+
+$scope.undo = function(){
+    $scope.undomanager.undo();
+  };
+
+  $scope.redo = function(){
+    $scope.undomanager.redo();
+  };
+
+
+
+    $scope.editor = null;
+      $scope.aceLoaded = function(_editor){
+
+        $scope.editor = _editor;
+        // Editor part
+          var _session = _editor.getSession();
+          var _renderer = _editor.renderer;
+
+          //_session.require("ace/ext/language_tools");
+
+          // Options
+          $scope.undomanager = new ace.UndoManager();
+          _session.setUndoManager($scope.undomanager);
+
+
+          _editor.setOptions({
+              enableBasicAutocompletion: true,
+              enableSnippets: true,
+              enableLiveAutocompletion: false
+         }); 
+
+      };
+
+        $scope.aceChanged = function(e) {
+          console.log('content changed'+$scope.content);
+        };
+
+      }]);
+
+
+
+    </script>
+  </body>
+</html>

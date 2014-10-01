@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="janino-src"/>
+	<classpathentry kind="src" path="commons-compiler-src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="ecj-4.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.google.appengine.server.runtimeTarget/Google App Engine"/>
+	<classpathentry kind="lib" path="commons-compiler.jar"/>
+	<classpathentry kind="lib" path="janino.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
